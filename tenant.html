@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Tenant Portal — FacilityFuz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.svg" alt="FacilityFuz logo"/><span class="brand-name">Facility<span class="brand-accent">Fuz</span></span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+      <div id="authCtas" class="nav-ctas">
+        <a class="btn btn-primary btn-sm" href="register.html">Register</a>
+        <a class="btn btn-outline btn-sm" href="signin.html">Sign In</a>
+      </div>
+      <div class="nav-ctas">
+        <span id="sessionInfo" class="muted"></span>
+        <button id="signOutBtn" class="btn btn-outline btn-sm">Sign out</button>
+      </div>
+      <button class="burger" aria-label="Open menu">☰</button>
+    </div>
+    <div class="mobile-menu">
+      <div class="grid gap cols-3">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+
+<section class="card">
+  <h3 class="h3">Create Work Order</h3>
+  <p class="muted">Log an issue for engineering or building ops.</p>
+  <form id="woForm" class="grid gap cols-2">
+    <div><label class="label">Category</label><select id="woCategory" name="category" class="input"></select></div>
+    <div><label class="label">Priority</label><select id="woPriority" name="priority" class="input"></select></div>
+    <div class="col-span-2"><label class="label">Location / Suite</label><input name="location" class="input" placeholder="Suite 1205, Conference A, etc." required/></div>
+    <div class="col-span-2"><label class="label">Description</label><textarea name="description" class="input" rows="4" required placeholder="Describe the issue…"></textarea></div>
+    <div class="col-span-2" style="text-align:right"><button class="btn btn-primary" type="submit">Submit Work Order</button></div>
+  </form>
+  <div style="margin-top:12px">
+    <h4 class="h4">My Requests</h4>
+    <div class="table-wrap"><table class="table"><thead><tr><th>ID</th><th>Category</th><th>Priority</th><th>Status</th><th>Created</th></tr></thead><tbody id="woRows"></tbody></table></div>
+  </div>
+</section>
+
+<section class="grid gap cols-2" style="margin-top:12px">
+  <div class="card">
+    <h3 class="h3">Reserve Space / Equipment</h3>
+    <form id="resForm" class="grid gap">
+      <div><label class="label">Resource</label><select id="resResource" name="resource" class="input"></select></div>
+      <div class="grid gap cols-2">
+        <div><label class="label">Date</label><input type="date" name="date" class="input" required/></div>
+        <div class="grid gap cols-2">
+          <div><label class="label">Start</label><input type="time" name="start" class="input" required/></div>
+          <div><label class="label">End</label><input type="time" name="end" class="input" required/></div>
+        </div>
+      </div>
+      <p id="resError" class="muted" style="color:#b91c1c"></p>
+      <div style="text-align:right"><button class="btn" type="submit">Request Slot</button></div>
+    </form>
+    <div style="margin-top:12px">
+      <h4 class="h4">Upcoming Reservations</h4>
+      <ul id="resList" class="list"></ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3 class="h3">Register Visitor</h3>
+    <form id="visForm" class="grid gap cols-3">
+      <div><label class="label">First Name</label><input name="firstName" class="input" required/></div>
+      <div><label class="label">Last Name</label><input name="lastName" class="input" required/></div>
+      <div><label class="label">Phone</label><input name="phone" class="input" type="tel" placeholder="(555) 555-5555"/></div>
+      <div class="col-span-2"><label class="label">Email</label><input name="email" class="input" type="email" placeholder="guest@example.com"/></div>
+      <div><label class="label">Host Suite</label><input name="suite" class="input" placeholder="1205" required/></div>
+      <div><label class="label">Date</label><input type="date" name="vdate" class="input" required/></div>
+      <div><label class="label">Time</label><input type="time" name="vtime" class="input" required/></div>
+      <div class="col-span-3" style="text-align:right"><button class="btn" type="submit">Generate Code</button></div>
+    </form>
+    <div style="margin-top:12px">
+      <h4 class="h4">Expected Visitors</h4>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Name</th><th>When</th><th>Host Suite</th><th>Code</th></tr></thead><tbody id="visRows"></tbody></table></div>
+    </div>
+  </div>
+</section>
+<script>window.addEventListener('DOMContentLoaded', FF.initTenant);</script>
+
+  </main>
+  <footer class="footer">
+    <span class="brand"><img src="assets/logo.svg" alt="" style="width:20px;height:20px"/><span>© 2025 FacilityFuz</span></span>
+    <span class="muted">Secure • Reliable • Simple</span>
+  </footer>
+</body>
+</html>

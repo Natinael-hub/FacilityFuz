@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Property Manager — FacilityFuz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.svg" alt="FacilityFuz logo"/><span class="brand-name">Facility<span class="brand-accent">Fuz</span></span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+      <div id="authCtas" class="nav-ctas">
+        <a class="btn btn-primary btn-sm" href="register.html">Register</a>
+        <a class="btn btn-outline btn-sm" href="signin.html">Sign In</a>
+      </div>
+      <div class="nav-ctas">
+        <span id="sessionInfo" class="muted"></span>
+        <button id="signOutBtn" class="btn btn-outline btn-sm">Sign out</button>
+      </div>
+      <button class="burger" aria-label="Open menu">☰</button>
+    </div>
+    <div class="mobile-menu">
+      <div class="grid gap cols-3">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+
+<section class="grid gap cols-2">
+  <div class="card col-span-2">
+    <h3 class="h3">Building Notices</h3>
+    <p class="muted">From property management</p>
+    <div class="item"><div class="strong">Planned System Update</div><div class="muted">Tonight 8–9 PM. No impact to visitor check‑in.</div></div>
+  </div>
+  <div class="card">
+    <h3 class="h3">Approvals Queue</h3>
+    <div class="table-wrap"><table class="table"><thead><tr><th>Resource</th><th>Start</th><th>End</th><th>Status</th><th></th></tr></thead><tbody id="apRows"></tbody></table></div>
+  </div>
+  <div class="card">
+    <h3 class="h3">Work Orders (Kanban‑lite)</h3>
+    <div class="table-wrap"><table class="table"><thead><tr><th>ID</th><th>Category</th><th>Priority</th><th>Status</th><th></th></tr></thead><tbody id="woRows"></tbody></table></div>
+  </div>
+</section>
+<script>window.addEventListener('DOMContentLoaded', FF.initPM);</script>
+
+  </main>
+  <footer class="footer">
+    <span class="brand"><img src="assets/logo.svg" alt="" style="width:20px;height:20px"/><span>© 2025 FacilityFuz</span></span>
+    <span class="muted">Secure • Reliable • Simple</span>
+  </footer>
+</body>
+</html>
