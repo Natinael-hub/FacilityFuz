@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>FacilityFuz — Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script defer src="assets/app.js"></script>
+  <style>
+    :root { --nav-h: 64px; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; }
+    .nav { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(6px); border-bottom: 1px solid #e5e7eb; background: rgba(255,255,255,0.85);}
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; height: var(--nav-h);}
+    .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; color: inherit; }
+    .brand img { width: 32px; height: 32px; }
+    .nav-bar { display: none; gap: 4px; align-items: center; }
+    @media (min-width: 768px){ .nav-bar { display: flex; } .burger { display:none; } .mobile-menu { display:none; } }
+    .nav-item { position: relative; }
+    .nav-btn { display:flex; align-items:center; gap:6px; padding:8px 12px; border-radius:10px; font-weight:600; text-decoration:none; color: inherit; }
+    .nav-btn:hover { background:#f5f5f5; }
+    .nav-item:where(:hover, :focus-within) > .submenu { display:block; }
+    .submenu { position:absolute; left:0; top: calc(100% - 1px); display:none; min-width: 220px; padding:8px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);}
+    .submenu a { display:block; padding:8px 10px; border-radius:8px; font-size:14px; text-decoration:none; color:#111827; }
+    .submenu a:hover { background:#f5f5f5; }
+    .submenu .hr { height:1px; background:#e5e7eb; margin:6px 4px; }
+    .btn { border:1px solid #111827; padding:8px 12px; border-radius:10px; font-weight:600; text-decoration:none; }
+    .btn-primary { background:#111827; color:#fff; border-color:#111827; }
+    .btn-outline { background:transparent; color:#111827; }
+    .btn-sm { padding:6px 10px; font-size:14px; }
+    .muted { color:#6b7280; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+    .hero { padding: 48px 16px; background: linear-gradient(180deg, #0b1c2a 0%, #0e2231 100%); color: #fff; border-radius: 16px; }
+    .h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.1; margin: 0 0 8px 0; }
+    .h3 { font-size: 18px; margin: 0 0 6px 0; }
+    .card { border:1px solid #e5e7eb; border-radius: 16px; padding: 14px; background:#fff; }
+    .grid { display:grid; }
+    .gap { gap:12px; }
+    .cols-home { grid-template-columns: 2fr 1fr 1fr; }
+    .col-span-2 { grid-column: span 2; }
+    @media (max-width: 900px){ .cols-home { grid-template-columns: 1fr; } .col-span-2 { grid-column: span 1; } }
+    .mobile-menu { border-top:1px solid #e5e7eb; background:#fff; display:none; }
+    .mobile-section { padding: 10px 16px; }
+    details.menu { border:1px solid #e5e7eb; border-radius:12px; padding:6px 10px; background:#fff; }
+    details.menu > summary { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-weight:600; }
+    details.menu[open] > summary .chev { transform: rotate(180deg); }
+    .mobile-sub { padding:8px 8px 10px 8px; }
+    .mobile-sub a { display:block; padding:8px 10px; border-radius:8px; text-decoration:none; color:#111827; }
+    .mobile-sub a:hover { background:#f5f5f5; }
+    .footer { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:16px; border-top:1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.svg" alt="FacilityFuz logo"/><span class="brand-name">Facility<span class="brand-accent">Fuz</span></span>
+      </a>
+      <nav class="nav-bar" aria-label="Primary">
+        <div class="nav-item">
+          <a href="services.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Services
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+          </a>
+          <div class="submenu" role="menu">
+            <a role="menuitem" href="services.html#work-orders">Work Orders</a>
+            <a role="menuitem" href="services.html#pm">Preventive Maintenance</a>
+            <a role="menuitem" href="services.html#marketplace">Vendor Marketplace</a>
+            <a role="menuitem" href="services.html#inspections">Inspections & Checklists</a>
+            <div class="hr"></div>
+            <a role="menuitem" href="pricing.html">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="career.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Career
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+          </a>
+          <div class="submenu" role="menu">
+            <a role="menuitem" href="career.html#open-roles">Open Roles</a>
+            <a role="menuitem" href="career.html#apply">Submit Application</a>
+            <div class="hr"></div>
+            <a role="menuitem" href="career.html#admin">Admin Login</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Contact
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+          </a>
+          <div class="submenu" role="menu">
+            <a role="menuitem" href="contact.html#sales">Sales</a>
+            <a role="menuitem" href="contact.html#support">Support</a>
+            <a role="menuitem" href="contact.html#press">Press/Media</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">About
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+          </a>
+          <div class="submenu" role="menu">
+            <a role="menuitem" href="about.html#company">Company</a>
+            <a role="menuitem" href="about.html#team">Leadership</a>
+            <a role="menuitem" href="about.html#careers">Careers</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="register.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Register
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+          </a>
+          <div class="submenu" role="menu">
+            <a role="menuitem" href="register.html#property-manager">Property Manager</a>
+            <a role="menuitem" href="register.html#vendor">Vendor</a>
+            <a role="menuitem" href="register.html#tenant">Tenant/Client</a>
+            <div class="hr"></div>
+            <a role="menuitem" href="signin.html">Sign In</a>
+          </div>
+        </div>
+      </nav>
+      <div id="authCtas" class="nav-ctas">
+        <a class="btn btn-primary btn-sm" href="register.html">Register</a>
+        <a class="btn btn-outline btn-sm" href="signin.html">Sign In</a>
+      </div>
+      <div class="nav-ctas">
+        <span id="sessionInfo" class="muted"></span>
+        <button id="signOutBtn" class="btn btn-outline btn-sm">Sign out</button>
+      </div>
+      <button class="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-section" style="display:grid; gap:10px;">
+        <details class="menu">
+          <summary>Services <span class="chev">▾</span></summary>
+          <div class="mobile-sub">
+            <a href="services.html#work-orders">Work Orders</a>
+            <a href="services.html#pm">Preventive Maintenance</a>
+            <a href="services.html#marketplace">Vendor Marketplace</a>
+            <a href="services.html#inspections">Inspections & Checklists</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
+        </details>
+        <details class="menu">
+          <summary>Career <span class="chev">▾</span></summary>
+          <div class="mobile-sub">
+            <a href="career.html#open-roles">Open Roles</a>
+            <a href="career.html#apply">Submit Application</a>
+            <a href="career.html#admin">Admin Login</a>
+          </div>
+        </details>
+        <details class="menu">
+          <summary>Contact <span class="chev">▾</span></summary>
+          <div class="mobile-sub">
+            <a href="contact.html#sales">Sales</a>
+            <a href="contact.html#support">Support</a>
+            <a href="contact.html#press">Press/Media</a>
+          </div>
+        </details>
+        <details class="menu">
+          <summary>About <span class="chev">▾</span></summary>
+          <div class="mobile-sub">
+            <a href="about.html#company">Company</a>
+            <a href="about.html#team">Leadership</a>
+            <a href="about.html#careers">Careers</a>
+          </div>
+        </details>
+        <details class="menu">
+          <summary>Register <span class="chev">▾</span></summary>
+          <div class="mobile-sub">
+            <a href="register.html#property-manager">Property Manager</a>
+            <a href="register.html#vendor">Vendor</a>
+            <a href="register.html#tenant">Tenant/Client</a>
+            <a href="signin.html">Sign In</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
+  
+<main class="container">
+  <h1 class="h1">Services</h1>
+  <p class="muted">Everything property teams need in one platform.</p>
+  <section id="work-orders" class="card" style="margin-top:12px;">
+    <h3 class="h3">Work Orders</h3>
+    <p>Create, assign, and track tasks with SLAs, photos, and comments.</p>
+  </section>
+  <section id="pm" class="card" style="margin-top:12px;">
+    <h3 class="h3">Preventive Maintenance</h3>
+    <p>Calendar-based PMs with checklists and asset history.</p>
+  </section>
+  <section id="marketplace" class="card" style="margin-top:12px;">
+    <h3 class="h3">Vendor Marketplace</h3>
+    <p>Find and onboard trusted pros with ratings & compliance.</p>
+  </section>
+  <section id="inspections" class="card" style="margin-top:12px;">
+    <h3 class="h3">Inspections & Checklists</h3>
+    <p>Standardize, document, and resolve issues faster.</p>
+  </section>
+</main>
+
+  <footer class="footer">
+    <span class="brand"><img src="assets/logo.svg" alt="" style="width:20px;height:20px"/><span>© 2025 FacilityFuz</span></span>
+    <span class="muted">Secure • Reliable • Simple</span>
+  </footer>
+  <script>
+    (function(){
+      const burger = document.querySelector('.burger');
+      const mobile = document.getElementById('mobileMenu');
+      if (burger && mobile){
+        burger.addEventListener('click', ()=>{
+          const open = mobile.style.display === 'block';
+          mobile.style.display = open ? 'none' : 'block';
+          burger.setAttribute('aria-expanded', String(!open));
+        });
+        document.addEventListener('click', (e)=>{
+          if(!mobile.contains(e.target) && !burger.contains(e.target)){
+            mobile.style.display = 'none';
+            burger.setAttribute('aria-expanded','false');
+          }
+        });
+      }
+      document.querySelectorAll('.nav-item').forEach(item => {
+        const btn = item.querySelector('.nav-btn');
+        const menu = item.querySelector('.submenu');
+        if(!btn || !menu) return;
+        item.addEventListener('mouseenter', ()=> btn.setAttribute('aria-expanded','true'));
+        item.addEventListener('mouseleave', ()=> btn.setAttribute('aria-expanded','false'));
+        item.addEventListener('keydown', (e)=>{
+          if(e.key === 'Escape'){ btn.focus(); btn.setAttribute('aria-expanded','false'); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
