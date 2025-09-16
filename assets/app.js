@@ -1,0 +1,1 @@
+// keep your existing app.js; this placeholder prevents 404 in previews
