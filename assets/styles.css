@@ -1,287 +1,117 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>FacilityFuz — Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css"/>
-  <script defer src="assets/app.js"></script>
-  <style>
-    /* ====== Minimal nav/dropdown CSS (safe alongside assets/styles.css) ====== */
-    :root { --nav-h: 64px; }
-    .nav { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(6px); border-bottom: 1px solid #e5e7eb; background: rgba(255,255,255,0.85);} 
-    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; height: var(--nav-h);} 
-    .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; }
-    .brand img { width: 32px; height: 32px; }
+:root{
+  --brand-primary:#0E2A47;
+  --brand-accent:#23C15C;
+  --brand-light:#F3F7FB;
+  --text:#0f172a;
+  --muted:#64748b;
+  --radius:16px;
+  --shadow:0 8px 24px rgba(14,42,71,.08);
+  --ring:0 0 0 3px rgba(35,193,92,.15);
 
-    /* Desktop nav */
-    .nav-bar { display: none; gap: 4px; align-items: center; }
-    @media (min-width: 768px){ .nav-bar { display: flex; } .burger { display:none; } .mobile-menu { display:none; } }
+  --font-sans: 'Inter', ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --fs-1: clamp(1.75rem, 1.1rem + 2.2vw, 2.75rem);
+  --fs-2: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+  --fs-3: clamp(1.10rem, .95rem + .6vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: .875rem;
+}
 
-    .nav-item { position: relative; }
-    .nav-btn { display:flex; align-items:center; gap:6px; padding:8px 12px; border-radius:10px; font-weight:600; text-decoration:none; }
-    .nav-btn:hover { background:#f5f5f5; }
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  font-size:var(--fs-body);
+  line-height:1.55;
+  color:var(--text);
+  background:linear-gradient(180deg, var(--brand-light), #fff);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+h1{font-size:var(--fs-1); line-height:1.2; margin:0 0 .5rem}
+h2{font-size:var(--fs-2); line-height:1.3; margin:0 0 .5rem}
+h3,h4{font-size:var(--fs-3); line-height:1.35; margin:0 0 .5rem}
+p{margin:.25rem 0 1rem}
+.small{font-size:var(--fs-small); color:var(--muted)}
+a{color:inherit; text-decoration:none}
 
-    /* Hover/focus dropdown show */
-    .nav-item:where(:hover, :focus-within) > .submenu { display:block; }
+.container{max-width:1100px; margin:0 auto; padding: clamp(16px, 2vw, 24px)}
 
-    /* Submenu: no-gaps: sits 1px under parent to avoid cursor gap */
-    .submenu { position:absolute; left:0; top: calc(100% - 1px); display:none; min-width: 220px; padding:8px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);} 
-    .submenu a { display:block; padding:8px 10px; border-radius:8px; font-size:14px; text-decoration:none; color:#111827; }
-    .submenu a:hover { background:#f5f5f5; }
-    .submenu .hr { height:1px; background:#e5e7eb; margin:6px 4px; }
+.nav{position:sticky; top:0; background:rgba(255,255,255,.85); backdrop-filter: blur(8px); border-bottom:1px solid #e5e7eb; z-index:50}
+.nav .inner{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px clamp(12px, 2vw, 24px)}
+.brand{display:flex; align-items:center; gap:8px}
+.nav-links{display:flex; gap:16px; align-items:center}
+.auth-ctas{display:flex; gap:8px; align-items:center}
+.session{display:flex; gap:10px; align-items:center}
+.burger{display:none; background:transparent; border:none; padding:8px; border-radius:10px}
+.burger:focus-visible{outline:none; box-shadow:var(--ring)}
 
-    /* Utilities used below (if not already in styles.css) */
-    .btn { border:1px solid #111827; padding:8px 12px; border-radius:10px; font-weight:600; text-decoration:none; }
-    .btn-primary { background:#111827; color:#fff; border-color:#111827; }
-    .btn-outline { background:transparent; color:#111827; }
-    .btn-sm { padding:6px 10px; font-size:14px; }
-    .muted { color:#6b7280; }
-    .grid { display:grid; }
-    .gap { gap:12px; }
-    .cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    @media (max-width: 767px){ .cols-3 { grid-template-columns: 1fr; } }
+.mobile-menu{position:absolute; left:0; right:0; top:100%; background:#fff; border-bottom:1px solid #e5e7eb; box-shadow: var(--shadow); padding:12px 16px; display:none}
+.mobile-menu.open{display:block}
+.mobile-menu .row{display:flex; flex-direction:column; gap:8px}
+.mobile-menu .split{display:flex; gap:8px}
+@media (max-width: 420px){ .mobile-menu .split{flex-direction:column} }
 
-    /* Mobile menu */
-    .mobile-menu { border-top:1px solid #e5e7eb; background:#fff; display:none; }
-    .mobile-section { padding: 10px 16px; }
-    details.menu {
-      border:1px solid #e5e7eb; border-radius:12px; padding:6px 10px; background:#fff;
-    }
-    details.menu > summary { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-weight:600; }
-    details.menu[open] > summary .chev { transform: rotate(180deg); }
-    .mobile-sub { padding:8px 8px 10px 8px; }
-    .mobile-sub a { display:block; padding:8px 10px; border-radius:8px; text-decoration:none; color:#111827; }
-    .mobile-sub a:hover { background:#f5f5f5; }
-    /* Sticky footer layout to force pages full-height */
-    html, body { height:100%; }
-    body { min-height:100vh; display:flex; flex-direction:column; }
-    main.container { flex: 1 0 auto; }
-    .footer { margin-top:auto; }
-  </style>
-</head>
-<body>
-  <!-- ===== Header / Navigation (logo/hero preserved) ===== -->
-  <header class="nav">
-    <div class="inner nav-inner">
-      <!-- Brand (unchanged) -->
-      <a href="index.html" class="brand">
-        <img src="assets/logo.svg" alt="FacilityFuz logo"/>
-        <span class="brand-name">Facility<span class="brand-accent">Fuz</span></span>
-      </a>
+.btn{border:1px solid #cbd5e1; background:#fff; padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600}
+.btn:hover{background:#f9fafb}
+.btn:focus-visible{outline:none; box-shadow:var(--ring)}
+.btn.primary{background:var(--brand-accent); color:#fff; border-color:transparent}
 
-      <!-- Desktop Nav with hover dropdowns -->
-      <nav class="nav-bar" aria-label="Primary">
-        <!-- Services -->
-        <div class="nav-item">
-          <a href="services.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Services
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-          </a>
-          <div class="submenu" role="menu">
-            <a role="menuitem" href="services.html#work-orders">Work Orders</a>
-            <a role="menuitem" href="services.html#pm">Preventive Maintenance</a>
-            <a role="menuitem" href="services.html#marketplace">Vendor Marketplace</a>
-            <a role="menuitem" href="services.html#inspections">Inspections & Checklists</a>
-            <div class="hr"></div>
-            <a role="menuitem" href="pricing.html">Pricing</a>
-          </div>
-        </div>
+.input, .select, .textarea{
+  width:100%; padding:12px; border:1px solid #e5e7eb; border-radius:12px; font:inherit;
+}
+.input:focus, .select:focus, .textarea:focus{outline:none; box-shadow:var(--ring)}
+.label{font-size:.85rem; color:#475569; margin-bottom:6px; display:block}
 
-        <!-- Career -->
-        <div class="nav-item">
-          <a href="career.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Career
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-          </a>
-          <div class="submenu" role="menu">
-            <a role="menuitem" href="career.html#open-roles">Open Roles</a>
-            <a role="menuitem" href="career.html#apply">Submit Application</a>
-            <div class="hr"></div>
-            <a role="menuitem" href="career.html#admin">Admin Login</a>
-          </div>
-        </div>
+.card{border:1px solid #e5e7eb; background:#fff; border-radius:var(--radius); box-shadow:0 1px 2px rgba(0,0,0,.03); padding:16px}
+.grid{display:grid; gap:16px}
+.grid-2{grid-template-columns: 1fr}
+.grid-3{grid-template-columns: 1fr}
+@media(min-width: 860px){ .grid-2{grid-template-columns:1fr 1fr} }
+@media(min-width: 1000px){ .grid-3{grid-template-columns: 2fr 1fr 1fr} }
+.two{display:grid; grid-template-columns: 1fr; gap:12px}
+@media(min-width: 720px){ .two{grid-template-columns:1fr 1fr} }
+.three{display:grid; grid-template-columns:1fr; gap:12px}
+@media(min-width: 900px){ .three{grid-template-columns:1fr 1fr 1fr} }
 
-        <!-- Contact -->
-        <div class="nav-item">
-          <a href="contact.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Contact
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-          </a>
-          <div class="submenu" role="menu">
-            <a role="menuitem" href="contact.html#sales">Sales</a>
-            <a role="menuitem" href="contact.html#support">Support</a>
-            <a role="menuitem" href="contact.html#press">Press/Media</a>
-          </div>
-        </div>
+.table-wrap{overflow:auto; -webkit-overflow-scrolling:touch; border-radius:12px; border:1px solid #f1f5f9}
+.table{width:100%; border-collapse:collapse; min-width:600px}
+.table th,.table td{border-bottom:1px solid #f1f5f9; padding:10px; text-align:left; font-size:.95rem}
+.badge{display:inline-block; padding:3px 8px; border-radius:999px; background:#eef2ff; border:1px solid #e5e7eb; font-size:.8rem}
+.mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono"; font-size:.85rem}
 
-        <!-- About -->
-        <div class="nav-item">
-          <a href="about.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">About
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-          </a>
-          <div class="submenu" role="menu">
-            <a role="menuitem" href="about.html#company">Company</a>
-            <a role="menuitem" href="about.html#team">Leadership</a>
-            <a role="menuitem" href="about.html#careers">Careers</a>
-          </div>
-        </div>
+.hero{border-radius:20px; padding: clamp(20px, 4vw, 32px); text-align:center; color:#fff;
+  background: linear-gradient(90deg, #0E2A47 0%, #0E2A47 60%, #23C15C 100%);
+  box-shadow: 0 8px 24px rgba(14,42,71,.08);
+}
+.footer{border-top:1px solid #e5e7eb; padding:16px clamp(12px, 2vw, 24px); color:#64748b; font-size:.875rem; display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap}
 
-        <!-- Register -->
-        <div class="nav-item">
-          <a href="register.html" class="nav-btn" aria-haspopup="true" aria-expanded="false">Register
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-          </a>
-          <div class="submenu" role="menu">
-            <a role="menuitem" href="register.html#property-manager">Property Manager</a>
-            <a role="menuitem" href="register.html#vendor">Vendor</a>
-            <a role="menuitem" href="register.html#tenant">Tenant/Client</a>
-            <div class="hr"></div>
-            <a role="menuitem" href="signin.html">Sign In</a>
-          </div>
-        </div>
-      </nav>
+/* Responsive nav */
+@media (max-width: 900px){
+  .nav-links, .auth-ctas, .session{display:none}
+  .burger{display:block}
+}
+.hidden{display:none}
+.row{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
 
-      <!-- Right-side CTAs (unchanged ids for your session logic) -->
-      <div id="authCtas" class="nav-ctas">
-        <a class="btn btn-primary btn-sm" href="register.html">Register</a>
-        <a class="btn btn-outline btn-sm" href="signin.html">Sign In</a>
-      </div>
-      <div class="nav-ctas">
-        <span id="sessionInfo" class="muted"></span>
-        <button id="signOutBtn" class="btn btn-outline btn-sm">Sign out</button>
-      </div>
+/* polish & components omitted for brevity... */
 
-      <!-- Mobile burger -->
-      <button class="burger" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
+/* layout: full-height pages + sticky footer */
+html, body { height: 100%; }
+body { min-height: 100vh; display: flex; flex-direction: column; }
+main.container { flex: 1 0 auto; }
+.footer { margin-top: auto; }
 
-    <!-- Mobile Menu with collapsible sections -->
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-section" style="display:grid; gap:10px;">
-        <details class="menu">
-          <summary>Services <span class="chev">▾</span></summary>
-          <div class="mobile-sub">
-            <a href="services.html#work-orders">Work Orders</a>
-            <a href="services.html#pm">Preventive Maintenance</a>
-            <a href="services.html#marketplace">Vendor Marketplace</a>
-            <a href="services.html#inspections">Inspections & Checklists</a>
-            <a href="pricing.html">Pricing</a>
-          </div>
-        </details>
-        <details class="menu">
-          <summary>Career <span class="chev">▾</span></summary>
-          <div class="mobile-sub">
-            <a href="career.html#open-roles">Open Roles</a>
-            <a href="career.html#apply">Submit Application</a>
-            <a href="career.html#admin">Admin Login</a>
-          </div>
-        </details>
-        <details class="menu">
-          <summary>Contact <span class="chev">▾</span></summary>
-          <div class="mobile-sub">
-            <a href="contact.html#sales">Sales</a>
-            <a href="contact.html#support">Support</a>
-            <a href="contact.html#press">Press/Media</a>
-          </div>
-        </details>
-        <details class="menu">
-          <summary>About <span class="chev">▾</span></summary>
-          <div class="mobile-sub">
-            <a href="about.html#company">Company</a>
-            <a href="about.html#team">Leadership</a>
-            <a href="about.html#careers">Careers</a>
-          </div>
-        </details>
-        <details class="menu">
-          <summary>Register <span class="chev">▾</span></summary>
-          <div class="mobile-sub">
-            <a href="register.html#property-manager">Property Manager</a>
-            <a href="register.html#vendor">Vendor</a>
-            <a href="register.html#tenant">Tenant/Client</a>
-            <a href="signin.html">Sign In</a>
-          </div>
-        </details>
-      </div>
-    </div>
-  </header>
-
-  <!-- ===== Main (hero preserved exactly) ===== -->
-  <main class="container">
-
-<section class="hero">
-  <div>
-    <h1 class="h1">Facility Operations Made Simple</h1>
-    <p class="muted" style="color:#e6eef6">Work orders • Reservations • Visitor Check‑in — unified and role‑based.</p>
-    <div style="margin-top:10px">
-      <a class="btn btn-primary" href="register.html">Register</a>
-      <a class="btn btn-outline" href="signin.html">Sign In</a>
-    </div>
-  </div>
-</section>
-
-<section class="grid gap cols-home" style="margin-top:12px">
-  <div class="card col-span-2">
-    <h3 class="h3">Get started</h3>
-    <p class="muted">Create an account and access your role‑based portal.</p>
-    <ul class="list" style="margin-top:8px">
-      <li>Tenants submit requests & book freight/rooftop.</li>
-      <li>Lobby checks guests in/out with codes.</li>
-      <li>Engineers see only their assigned work.</li>
-      <li>PMs approve, notify, and report on SLAs.</li>
-    </ul>
-  </div>
-  <div class="card">
-    <h3 class="h3">Why FacilityFuz</h3>
-    <p class="muted">Clarity for every role.</p>
-  </div>
-  <div class="card">
-    <h3 class="h3">Mobile‑ready</h3>
-    <p class="muted">Responsive UI + hamburger nav.</p>
-  </div>
-</section>
-<script>window.addEventListener('DOMContentLoaded', FF.initHome);</script>
-
-  </main>
-
-  <!-- ===== Footer (unchanged) ===== -->
-  <footer class="footer">
-    <span class="brand"><img src="assets/logo.svg" alt="" style="width:20px;height:20px"/><span>© 2025 FacilityFuz</span></span>
-    <span class="muted">Secure • Reliable • Simple</span>
-  </footer>
-
-  <!-- Small helper JS for burger toggle and keyboard a11y on desktop menus -->
-  <script>
-    (function(){
-      const burger = document.querySelector('.burger');
-      const mobile = document.getElementById('mobileMenu');
-      if (burger && mobile){
-        burger.addEventListener('click', ()=>{
-          const open = mobile.style.display === 'block';
-          mobile.style.display = open ? 'none' : 'block';
-          burger.setAttribute('aria-expanded', String(!open));
-        });
-        document.addEventListener('click', (e)=>{
-          if(!mobile.contains(e.target) && !burger.contains(e.target)){
-            mobile.style.display = 'none';
-            burger.setAttribute('aria-expanded','false');
-          }
-        });
-      }
-
-      // Desktop dropdowns: keep aria-expanded in sync for accessibility
-      document.querySelectorAll('.nav-item').forEach(item => {
-        const btn = item.querySelector('.nav-btn');
-        const menu = item.querySelector('.submenu');
-        if(!btn || !menu) return;
-        item.addEventListener('mouseenter', ()=> btn.setAttribute('aria-expanded','true'));
-        item.addEventListener('mouseleave', ()=> btn.setAttribute('aria-expanded','false'));
-        // Close on Esc when focused inside submenu
-        item.addEventListener('keydown', (e)=>{
-          if(e.key === 'Escape'){ btn.focus(); btn.setAttribute('aria-expanded','false'); }
-        });
-      });
-    })();
-  </script>
-</body>
-</html>
+/* desktop dropdown nav (no gap on hover) */
+.nav-item { position: relative; }
+.nav-btn { display:flex; align-items:center; gap:6px; padding:8px 12px; border-radius:10px; font-weight:600; }
+.nav-btn:hover { background:#f9fafb; }
+.nav-item:where(:hover, :focus-within) > .submenu { display:block; }
+.submenu {
+  position:absolute; left:0; top:calc(100% - 1px);
+  display:none; min-width:220px; padding:8px;
+  background:#fff; border:1px solid #e5e7eb; border-radius:12px; box-shadow: 0 8px 24px rgba(14,42,71,.08);
+}
+.submenu a { display:block; padding:8px 10px; border-radius:8px; font-size:.95rem; }
+.submenu a:hover { background:#f9fafb; }
+.submenu .hr { height:1px; background:#e5e7eb; margin:6px 4px; }
